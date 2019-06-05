@@ -1,12 +1,53 @@
+function isNotInteger(a) {
+  return !Number.isInteger(a);
+}
+
 export function riddleSolver(board) {
-  let arrayChanged = true;
-  let tmpBoard = board.map(function(b) {
-    return b.slice();
-  });
+  //test if board is an array
+  if (!Array.isArray(board)) {
+    return 0;
+  }
+
   let height = board.length;
   let width = board[0].length;
 
+  //check if dimentions are ok
+  if (height < 3 || height > 50 || width < 3 || width > 50) {
+    return 0;
+  }
+  if (board.some(a => a.length != width)) {
+    return 0;
+  }
+
+  //check if all elements are integers
+  if (
+    board.some(a => {
+      return a.some(isNotInteger);
+    })
+  ) {
+    return 0;
+  }
+
+  //check if all integers are in range
+  if (
+    board.some(a => {
+      return a.some(a => {
+        return a < 1 || a > 1000;
+      });
+    })
+  ) {
+    return 0;
+  }
+
+  //initialize variables
+  var arrayChanged = true;
+  var tmpBoard = board.map(function(b) {
+    return b.slice();
+  });
+
+  //find solution
   while (arrayChanged) {
+    //if no changes are made, theres no need to keep going
     arrayChanged = false;
 
     // search columns
