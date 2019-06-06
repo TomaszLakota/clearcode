@@ -3,7 +3,7 @@
 ### riddleSolver(board)
 
 > takes exactly 1 argument (board)
-> returns array with solution or an empty array, if board doesn't meet all conditions
+> returns array with solution or throws an error, if board doesn't meet all conditions
 
 - Function only takes a two-dimensional array of integers in range [1, 1000].
 - The numbers of columns and rows in array have to be in range [3, 50].

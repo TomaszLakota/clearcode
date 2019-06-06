@@ -1,38 +1,46 @@
 export function riddleSolver(board) {
-  //test if board is an array
-  if (!Array.isArray(board)) {
-    return [];
-  }
+  var height = 0;
+  var width = 0;
 
-  let height = board.length;
-  let width = board[0].length;
+  try {
+    //test if board is an array
+    if (!Array.isArray(board)) {
+      throw new Error("board is not an array");
+    }
 
-  //check if dimentions are ok
-  if (height < 3 || height > 50 || width < 3 || width > 50) {
-    return [];
-  }
-  if (!board.every(a => a.length === width)) {
-    return [];
-  }
+    //set dimentions
+    height = board.length;
+    width = board[0].length;
 
-  //check if all elements are integers
-  if (
-    !board.every(a => {
-      return a.every(b => Number.isInteger(b));
-    })
-  ) {
-    return [];
-  }
+    //check if dimentions are ok
+    if (height < 3 || height > 50 || width < 3 || width > 50) {
+      throw new Error("board dimentions dont meet the conditions");
+    }
+    if (!board.every(a => a.length === width)) {
+      throw new Error("board is not rectangular");
+    }
 
-  //check if all integers are in range
-  if (
-    !board.every(a => {
-      return a.every(b => {
-        return b >= 1 && b <= 1000;
-      });
-    })
-  ) {
-    return [];
+    //check if all elements are integers
+    if (
+      !board.every(a => {
+        return a.every(b => Number.isInteger(b));
+      })
+    ) {
+      throw new Error("not all numbers in the board are integers");
+    }
+
+    //check if all integers are in range
+    if (
+      !board.every(a => {
+        return a.every(b => {
+          return b >= 1 && b <= 1000;
+        });
+      })
+    ) {
+      throw new Error("not all numbers fall into range of [1,1000]");
+    }
+  } catch (error) {
+    return error;
   }
 
   //initialize variables
@@ -115,5 +123,6 @@ export function riddleSolver(board) {
       return b.slice();
     });
   }
+
   return board;
 }
