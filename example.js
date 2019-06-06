@@ -1,11 +1,7 @@
-function isNotInteger(a) {
-  return !Number.isInteger(a);
-}
-
 export function riddleSolver(board) {
   //test if board is an array
   if (!Array.isArray(board)) {
-    return 0;
+    return [];
   }
 
   let height = board.length;
@@ -13,30 +9,30 @@ export function riddleSolver(board) {
 
   //check if dimentions are ok
   if (height < 3 || height > 50 || width < 3 || width > 50) {
-    return 0;
+    return [];
   }
-  if (board.some(a => a.length != width)) {
-    return 0;
+  if (!board.every(a => a.length === width)) {
+    return [];
   }
 
   //check if all elements are integers
   if (
-    board.some(a => {
-      return a.some(isNotInteger);
+    !board.every(a => {
+      return a.every(b => Number.isInteger(b));
     })
   ) {
-    return 0;
+    return [];
   }
 
   //check if all integers are in range
   if (
-    board.some(a => {
-      return a.some(a => {
-        return a < 1 || a > 1000;
+    !board.every(a => {
+      return a.every(b => {
+        return b >= 1 && b <= 1000;
       });
     })
   ) {
-    return 0;
+    return [];
   }
 
   //initialize variables

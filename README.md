@@ -3,7 +3,7 @@
 ### riddleSolver(board)
 
 > takes exactly 1 argument (board)
-> returns array with solution or 0, if board doesn't meet requirements
+> returns array with solution or an empty array, if board doesn't meet all conditions
 
 - Function only takes a two-dimensional array of integers in range [1, 1000].
 - The numbers of columns and rows in array have to be in range [3, 50].
@@ -17,7 +17,7 @@
 
 # Solution
 
-- Before looking for solution, we first check, if passed `board` meets the requirements: we check, if board is an array, if array dimentions are OK and if all elements are integers in range of [1,1000]
+- Before looking for solution, we first check, if passed `board` meets the requirements: board is an array, array dimentions are OK and all elements are integers in range of [1,1000]
 - A copy of the board is created: `tmpBoard`, so that we can avoid applying changes to original array in case one integer is used in both vertical and horizontal match
 - When we enter the `while` loop, `arrayChanged` is set to false, so that if no changes are made during iteration, program will exit the loop
 - Next we search columns for the same integers adjacent vertically:
